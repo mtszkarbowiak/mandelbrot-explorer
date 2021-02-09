@@ -3,20 +3,29 @@ using UnityEngine.UI;
 
 namespace Mandelbrot
 {
+    // Tasks:
+    // - Binding fractal view (unity.ui target image) with controller
+    // - Reacting to fractal view resolution changes
+    
     public class FractalView : MonoBehaviour
     {
-        [SerializeField] private float resolutionAwaiting = 0.5f;
+        [Header("Persistent")]
         [SerializeField] private FractalController controller;
         [SerializeField] private RawImage targetImage;
+        
+        [Header("Realtime")] 
+        [SerializeField] private float resolutionResetInterval = 0.5f;
 
+        
         private Vector2Int _currentResolution;
-        private float _timePastLastReset;
+        private float _timeSinceLastReset;
         private bool _isTargetImageNull;
 
 
         private void Start()
         {
             _isTargetImageNull = targetImage == null;
+            
             ResetControllerResolution(GetDesiredResolution());
         }
 
@@ -25,20 +34,16 @@ namespace Mandelbrot
         {
             _currentResolution = GetDesiredResolution();
 
-            if (_currentResolution != controller.Resolution && _timePastLastReset > resolutionAwaiting)
-            {
-                _timePastLastReset = 0f;
-    
+            if (_currentResolution != controller.Resolution && _timeSinceLastReset > resolutionResetInterval)
                 ResetControllerResolution(_currentResolution);
-            }
-            else
-            {
-                _timePastLastReset += Time.deltaTime;
-            }
+            else 
+                _timeSinceLastReset += Time.deltaTime;
         }
 
         private void ResetControllerResolution(Vector2Int resolution)
         {
+            _timeSinceLastReset = 0f;
+            
             targetImage.texture = controller.ResetResolution(resolution);
         }
 

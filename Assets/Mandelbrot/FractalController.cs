@@ -2,6 +2,11 @@ using UnityEngine;
 
 namespace Mandelbrot
 {
+    // Tasks:
+    // - Controlling target image with its attributes (resolution)
+    // - Binding target image with shader
+    // - Dispatching the shader
+    
     public class FractalController : MonoBehaviour
     {
         // Unity Inspector fields
@@ -19,6 +24,7 @@ namespace Mandelbrot
         public Vector2 funcBase = Vector2.zero;
         public byte funcIterations = 30;
 
+        
         // Changing fields
         private RenderTexture _activeRenderTexture;
 
@@ -99,7 +105,7 @@ namespace Mandelbrot
             };
             _activeRenderTexture.Create();
             
-            
+            // Link new texture to shader
             juliaShader.SetTexture(_mainKernel,_textureId,_activeRenderTexture);
             juliaShader.SetInt(_screenSizeXId,resolution.x);
             juliaShader.SetInt(_screenSizeYId,resolution.y);
