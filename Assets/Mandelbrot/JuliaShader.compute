@@ -47,5 +47,5 @@ void julia_pixel (const uint3 id : SV_DispatchThreadID)
     }
 
     // Painting on Canvas
-    canvas[id.xy] = float4(abs(number.x), abs(number.y), 0.0f, 0.0f);
+    canvas[id.xy] = float4(abs(number.x), abs(number.y), 0.0f, 1.0f);
 }
