@@ -1,0 +1,51 @@
+#pragma kernel julia_pixel
+
+RWTexture2D<float4> canvas;
+uniform uint canvas_size_x;
+uniform uint canvas_size_y;
+
+uniform float view_scalar;
+uniform float view_shift_x;
+uniform float view_shift_y;
+
+uniform float func_base_real;
+uniform float func_base_imaginary;
+uniform uint func_iterations;
+
+
+// Standard complex numbers multiplication
+float2 mul_complex(const float2 a, const float2 b)
+{
+    return float2(
+        a.x * b.x - a.y * b.y,
+        a.x * b.y + a.y * b.x
+        );
+}
+
+[numthreads(8,8,1)]
+void julia_pixel (const uint3 id : SV_DispatchThreadID)
+{
+    // Mandelbrot set function argument
+    float2 arg;
+    {
+        const uint screen_buki = min(canvas_size_x,canvas_size_y);
+        const float2 screen_px = id.xy - float2(canvas_size_x,canvas_size_y) / 2.0;
+        const float2 screen_f = screen_px / ((float)screen_buki);
+        
+        arg = screen_f * view_scalar + float2(view_shift_x,view_shift_y);
+    }
+
+    // Complex number to be iterated on
+    float2 number = float2(func_base_real,func_base_imaginary);
+
+    // Mandelbrot set iterations
+    uint iteration = 0;
+    while (iteration < func_iterations)
+    {
+        number = mul_complex(number, number) + arg;
+        iteration++;
+    }
+
+    // Painting on Canvas
+    canvas[id.xy] = float4(abs(number.x), abs(number.y), 0.0f, 0.0f);
+}
