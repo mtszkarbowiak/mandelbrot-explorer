@@ -321,7 +321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &161658134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -385,7 +385,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 161658136}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1574778597}
+        m_TargetAssemblyTypeName: Mandelbrot.FractalViewGUI, Assembly-CSharp
+        m_MethodName: SwitchColorPalette
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &161658136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3095051, g: 0.727275, b: 0.7924528, a: 1}
+  m_Color: {r: 0.3095051, g: 0.727275, b: 0.7924528, a: 0.6117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1027,7 +1039,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: x=0.00000 y=0.00000
+  m_Text: (x=0.00000 y=0.00000)
 --- !u!222 &732387177
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1149,7 +1161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 120, y: -1}
+  m_AnchoredPosition: {x: 125, y: -1}
   m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1089129654
@@ -1795,6 +1807,10 @@ MonoBehaviour:
   viewScalar: 1
   funcBase: {x: 0, y: 0}
   funcIterations: 30
+  _colorRealPositive: {x: 1, y: 0, z: 0, w: 0}
+  _colorImaginaryPositive: {x: 0, y: 1, z: 0, w: 0}
+  _colorRealNegative: {x: 0.5, y: 0, z: 0.5, w: 0}
+  _colorImaginaryNegative: {x: 0, y: 0.5, z: 0.5, w: 0}
 --- !u!4 &1574778595
 Transform:
   m_ObjectHideFlags: 0
@@ -1843,6 +1859,20 @@ MonoBehaviour:
   iterationScrollbar: {fileID: 427495513}
   zoomLabelText: {fileID: 1719903455}
   positionLabelText: {fileID: 732387176}
+  _colorPalettes:
+  - colorRealPositive: {x: 1, y: 1, z: 1, w: 0}
+    colorImaginaryPositive: {x: 1, y: 1, z: 1, w: 0}
+    colorRealNegative: {x: 1, y: 1, z: 1, w: 0}
+    colorImaginaryNegative: {x: 1, y: 1, z: 1, w: 0}
+  - colorRealPositive: {x: 1, y: 0, z: 0, w: 0}
+    colorImaginaryPositive: {x: 0, y: 0, z: 1, w: 0}
+    colorRealNegative: {x: 1, y: 0, z: 0, w: 0}
+    colorImaginaryNegative: {x: 0, y: 0, z: 1, w: 0}
+  - colorRealPositive: {x: 1, y: 0, z: 0, w: 0}
+    colorImaginaryPositive: {x: 0, y: 1, z: 0, w: 0}
+    colorRealNegative: {x: 0.5, y: 0, z: 0.5, w: 0}
+    colorImaginaryNegative: {x: 0.5, y: 0, z: 0.5, w: 0}
+  _currentColorPalette: 0
 --- !u!1 &1697214926
 GameObject:
   m_ObjectHideFlags: 0

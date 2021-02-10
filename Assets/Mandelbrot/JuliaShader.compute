@@ -12,6 +12,11 @@ uniform float func_base_real;
 uniform float func_base_imaginary;
 uniform uint func_iterations;
 
+uniform half4 color_real_positive;
+uniform half4 color_imaginary_positive;
+uniform half4 color_real_negative;
+uniform half4 color_imaginary_negative;
+
 
 // Standard complex numbers multiplication
 float2 mul_complex(const float2 a, const float2 b)
@@ -20,6 +25,18 @@ float2 mul_complex(const float2 a, const float2 b)
         a.x * b.x - a.y * b.y,
         a.x * b.y + a.y * b.x
         );
+}
+
+float4 get_pigment(const float2 number)
+{
+    float4 result = float4(0.0,0.0,0.0,1.0);
+
+    result += color_real_positive * saturate(number.x);
+    result += color_real_negative * saturate(-number.x);
+    result += color_imaginary_positive * saturate(number.y);
+    result += color_imaginary_negative * saturate(-number.y);
+
+    return result;
 }
 
 [numthreads(8,8,1)]
@@ -46,6 +63,6 @@ void julia_pixel (const uint3 id : SV_DispatchThreadID)
         iteration++;
     }
 
-    // Painting on Canvas
-    canvas[id.xy] = float4(abs(number.x), abs(number.y), 0.0f, 1.0f);
+    
+    canvas[id.xy] = get_pigment(number);
 }
