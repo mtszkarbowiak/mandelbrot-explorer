@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,24 +8,23 @@ namespace Mandelbrot
     // - Binding fractal view (unity.ui target image) with controller
     // - Reacting to fractal view resolution changes
     
-    public class FractalView : MonoBehaviour
+    public class FractalViewResolution : MonoBehaviour
     {
         [Header("Persistent")]
         [SerializeField] private FractalController controller;
         [SerializeField] private RawImage targetImage;
         
-        [Header("Realtime")] 
+        [Header("Configuration")] 
         [SerializeField] private float resolutionResetInterval = 0.5f;
-
         
-        private Vector2Int _currentResolution;
+
         private float _timeSinceLastReset;
-        private bool _isTargetImageNull;
 
 
         private void Start()
         {
-            _isTargetImageNull = targetImage == null;
+            if (controller == null) throw new NullReferenceException("Controller not set.");
+            if (targetImage == null) throw new NullReferenceException("Target Unity.UI.RawImage not set.");
             
             ResetControllerResolution(GetDesiredResolution());
         }
@@ -32,12 +32,12 @@ namespace Mandelbrot
         
         private void Update()
         {
-            _currentResolution = GetDesiredResolution();
-
-            if (_currentResolution != controller.Resolution && _timeSinceLastReset > resolutionResetInterval)
-                ResetControllerResolution(_currentResolution);
-            else 
-                _timeSinceLastReset += Time.deltaTime;
+            if (GetDesiredResolution() != controller.Resolution && 
+                _timeSinceLastReset > resolutionResetInterval)
+            {
+                ResetControllerResolution(GetDesiredResolution());
+            }
+            else _timeSinceLastReset += Time.deltaTime;
         }
 
         private void ResetControllerResolution(Vector2Int resolution)
@@ -50,13 +50,6 @@ namespace Mandelbrot
         
         private Vector2Int GetDesiredResolution()
         {
-            if (_isTargetImageNull)
-            {
-                return new Vector2Int(
-                    Screen.width,
-                    Screen.height);
-            }
-            
             return Vector2Int.RoundToInt(targetImage.rectTransform.rect.size);
         }
     }
