@@ -49,10 +49,10 @@ namespace Mandelbrot
                 _currentColorPalette < 0)
                 _currentColorPalette = 0;
 
-            controller._colorRealPositive = _colorPalettes[_currentColorPalette].colorRealPositive;
-            controller._colorRealNegative = _colorPalettes[_currentColorPalette].colorRealNegative;
-            controller._colorImaginaryPositive = _colorPalettes[_currentColorPalette].colorImaginaryPositive;
-            controller._colorImaginaryNegative = _colorPalettes[_currentColorPalette].colorImaginaryNegative;
+            controller.colorRealPositive = _colorPalettes[_currentColorPalette].colorRealPositive;
+            controller.colorRealNegative = _colorPalettes[_currentColorPalette].colorRealNegative;
+            controller.colorImaginaryPositive = _colorPalettes[_currentColorPalette].colorImaginaryPositive;
+            controller.colorImaginaryNegative = _colorPalettes[_currentColorPalette].colorImaginaryNegative;
         }
 
 

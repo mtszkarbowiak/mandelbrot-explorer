@@ -23,8 +23,8 @@ namespace Mandelbrot
         [Range(3.0f, 0.001f)] public float viewScalar = 1.0f;
         public Vector2 funcBase = Vector2.zero;
         public byte funcIterations = 30;
-        public Vector4 _colorRealPositive, _colorImaginaryPositive;
-        public Vector4 _colorRealNegative, _colorImaginaryNegative;
+        public Vector4 colorRealPositive, colorImaginaryPositive;
+        public Vector4 colorRealNegative, colorImaginaryNegative;
         
         // Changing fields
         private RenderTexture _activeRenderTexture;
@@ -84,10 +84,10 @@ namespace Mandelbrot
             juliaShader.SetFloat(_funcBaseImaginaryId, funcBase.y);
             juliaShader.SetInt(_funcIterationsId, funcIterations);
             
-            juliaShader.SetVector(_colorRealPositiveId,_colorRealPositive);
-            juliaShader.SetVector(_colorImaginaryPositiveId,_colorImaginaryPositive);
-            juliaShader.SetVector(_colorRealNegativeId,_colorRealNegative);
-            juliaShader.SetVector(_colorImaginaryNegativeId,_colorImaginaryNegative);
+            juliaShader.SetVector(_colorRealPositiveId,colorRealPositive);
+            juliaShader.SetVector(_colorImaginaryPositiveId,colorImaginaryPositive);
+            juliaShader.SetVector(_colorRealNegativeId,colorRealNegative);
+            juliaShader.SetVector(_colorImaginaryNegativeId,colorImaginaryNegative);
             
             // Update fractal image (by dispatching the shader)
             juliaShader.Dispatch(
