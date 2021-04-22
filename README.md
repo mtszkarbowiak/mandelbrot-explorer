@@ -13,7 +13,7 @@ Application...
 
 ## Instructions
 
-![Screenshot1](C:\Repositories\Unity\MandelbrotExplorer\Docs\1.png)
+![Screenshot1](./Docs/1.png)
 
 | Key                        | Action                            |
 | -------------------------- | --------------------------------- |
