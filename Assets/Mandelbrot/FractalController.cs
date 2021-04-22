@@ -35,6 +35,7 @@ namespace Mandelbrot
         private int _funcBaseRealId, _funcBaseImaginaryId, _funcIterationsId;
         private int _colorRealPositiveId, _colorImaginaryPositiveId;
         private int _colorRealNegativeId, _colorImaginaryNegativeId;
+        private int _xThreadsSize, _yThreadsSize;
 
         // Accessors
         public Vector2Int Resolution => resolution;
@@ -69,7 +70,15 @@ namespace Mandelbrot
             _colorRealPositiveId = Shader.PropertyToID("color_real_positive");
             _colorImaginaryPositiveId = Shader.PropertyToID("color_imaginary_positive"); 
             _colorRealNegativeId = Shader.PropertyToID("color_real_negative");
-            _colorImaginaryNegativeId = Shader.PropertyToID("color_imaginary_negative"); 
+            _colorImaginaryNegativeId = Shader.PropertyToID("color_imaginary_negative");
+
+            juliaShader.GetKernelThreadGroupSizes(_mainKernel, 
+                out var xThreadsSize, 
+                out var yThreadsSize, 
+                out _);
+
+            _xThreadsSize = (int) xThreadsSize;
+            _yThreadsSize = (int) yThreadsSize;
         }
 
         
@@ -92,8 +101,8 @@ namespace Mandelbrot
             // Update fractal image (by dispatching the shader)
             juliaShader.Dispatch(
                 kernelIndex: _mainKernel,
-                threadGroupsX: resolution.x/8,
-                threadGroupsY: resolution.y/8,
+                threadGroupsX: resolution.x/_xThreadsSize + 1,
+                threadGroupsY: resolution.y/_yThreadsSize + 1,
                 threadGroupsZ: 1);
         }
 

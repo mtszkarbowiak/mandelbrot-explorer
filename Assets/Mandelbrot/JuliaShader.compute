@@ -12,22 +12,41 @@ uniform float func_base_real;
 uniform float func_base_imaginary;
 uniform uint func_iterations;
 
+
 uniform half4 color_real_positive;
 uniform half4 color_imaginary_positive;
 uniform half4 color_real_negative;
 uniform half4 color_imaginary_negative;
 
 
-// Standard complex numbers multiplication
 float2 mul_complex(const float2 a, const float2 b)
 {
+    // Standard complex numbers multiplication
     return float2(
         a.x * b.x - a.y * b.y,
         a.x * b.y + a.y * b.x
         );
 }
 
-float4 get_pigment(const float2 number)
+float saturate_result(float f)
+{
+    const float sigmoid_kick = 0.6;
+    
+    // Sigmoid, stretched to span values at (-1,1) instead of (0,1)
+    f = 1 / (1 + exp(f) * sigmoid_kick) * 2 - 1;
+
+    return f;
+}
+
+float2 saturate_result(float2 result)
+{
+    result.x = saturate_result(result.x);
+    result.y = saturate_result(result.y);
+    
+    return result;
+}
+
+float4 colorize(const float2 number)
 {
     float4 result = float4(0.0,0.0,0.0,1.0);
 
@@ -63,6 +82,6 @@ void julia_pixel (const uint3 id : SV_DispatchThreadID)
         iteration++;
     }
 
-    
-    canvas[id.xy] = get_pigment(number);
+    const float2 result = saturate_result(number);
+    canvas[id.xy] = colorize(result);
 }
