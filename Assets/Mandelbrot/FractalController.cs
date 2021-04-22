@@ -22,7 +22,7 @@ namespace Mandelbrot
         public Vector2 viewOrigin = Vector2.zero;
         [Range(3.0f, 0.001f)] public float viewScalar = 1.0f;
         public Vector2 funcBase = Vector2.zero;
-        public byte funcIterations = 30;
+        public int funcIterations = 30;
         public Vector4 colorRealPositive, colorImaginaryPositive;
         public Vector4 colorRealNegative, colorImaginaryNegative;
         

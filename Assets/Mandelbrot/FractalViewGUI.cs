@@ -17,10 +17,15 @@ namespace Mandelbrot
 
         [SerializeField] private ColorPalette[] _colorPalettes;
         [SerializeField] private int _currentColorPalette;
-       
+
+        [Header("Config")]
+        [SerializeField] private AnimationCurve scrollbarITerationNumber;
+
         private void Start()
         {
             if (controller == null) throw new NullReferenceException("Controller not set.");
+            
+            SwitchColorPalette();
         }
 
         private void Update()
@@ -31,7 +36,10 @@ namespace Mandelbrot
             }
 
             {
-                controller.funcIterations = (byte) Mathf.RoundToInt(iterationScrollbar.value * 255f);
+                var iterationsCont = scrollbarITerationNumber.Evaluate(iterationScrollbar.value);
+                var iterations = Mathf.CeilToInt(iterationsCont);
+                
+                controller.funcIterations = iterations;
                 iterationCounterText.text = controller.funcIterations.ToString();
             }
 

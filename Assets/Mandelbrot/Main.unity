@@ -256,6 +256,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2143602408}
+  - {fileID: 538421887}
   - {fileID: 427495512}
   - {fileID: 161658134}
   m_Father: {fileID: 68495316}
@@ -336,7 +337,7 @@ RectTransform:
   m_Children:
   - {fileID: 188696573}
   m_Father: {fileID: 142749122}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -779,14 +780,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1146630275}
-  - {fileID: 538421887}
   m_Father: {fileID: 142749122}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: 0}
-  m_SizeDelta: {x: 180, y: -10}
+  m_AnchoredPosition: {x: 122.49999, y: 0}
+  m_SizeDelta: {x: -265.00003, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427495513
 MonoBehaviour:
@@ -831,8 +831,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1905148936}
   m_HandleRect: {fileID: 1905148935}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.2
+  m_Value: 0.1
+  m_Size: 0.05
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -901,16 +901,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538421886}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 427495512}
+  m_Father: {fileID: 142749122}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -135, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &538421888
@@ -940,7 +940,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1766,6 +1766,7 @@ GameObject:
   - component: {fileID: 1574778593}
   - component: {fileID: 1574778596}
   - component: {fileID: 1574778597}
+  - component: {fileID: 1574778598}
   m_Layer: 0
   m_Name: Fractal
   m_TagString: Untagged
@@ -1874,6 +1875,44 @@ MonoBehaviour:
     colorRealNegative: {x: 0.5, y: 0, z: 0.5, w: 0}
     colorImaginaryNegative: {x: 0.5, y: 0, z: 0.5, w: 0}
   _currentColorPalette: 0
+  scrollbarITerationNumber:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2000
+      inSlope: 2668.5317
+      outSlope: 2668.5317
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.75051045
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1574778598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574778592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf208c5125e8bc4bbec05d4cf00dabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullScreenTrigger: 292
+  quitAppTrigger: 27
 --- !u!1 &1697214926
 GameObject:
   m_ObjectHideFlags: 0
